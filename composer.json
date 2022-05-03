@@ -1,0 +1,24 @@
+{
+  "name": "landofcoder/module-sega-pay-suite-graph-ql",
+  "description": "Segapay suite payment for magento 2",
+  "authors": [
+      {
+        "name": "Landofcoder",
+        "email": "landofcoder@gmail.com",
+        "homepage": "https://landofcoder.com",
+        "role": "Magento 2 extension & Ecommerce Solution Provider"
+      }
+  ],
+  "require": {
+      "ebizmarts/sagepaysuite": "1.*"
+  },
+  "type": "magento2-module",
+  "version": "1.0.0",
+  "license": "GPL-3.0",
+  "autoload": {
+      "files": [ "registration.php" ],
+      "psr-4": {
+          "Lof\\SagePaySuiteGraphQl\\": ""
+      }
+  }
+}

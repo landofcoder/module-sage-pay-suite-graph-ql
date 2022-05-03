@@ -1,0 +1,43 @@
+type StoreConfig @doc(description: "The type contains information about a store config") {
+    sagepaysuite_mode: String @doc(description: "Segapay Mode, either test or live")
+    sagepaysuite_active: String @doc(description: "Segapay is active or not")
+    sagepaysuite_max_token: String @doc(description: "Max amount of tokens per customer")
+}
+
+type Customer {
+    listSegapayTokens: SegaPayTokens @resolver( class: "Lof\\SagePaySuiteGraphQl\\Model\\Resolver\\ListTokens") @doc(description: "Query list saved segapay tokens of current customer.")
+}
+
+type SegaPayTokens {
+    total_count: Int @doc(description: "The number of tokens returned")
+    items: [SegaPayToken] @doc(description: "An array of tokens that match the specified search criteria")
+}
+
+type SegaPayToken {
+    token_id: Int @doc(description: "Token ID")
+    cc_last_4: Int @doc(description: "CC Last Four")
+    cc_type: Int @doc(description: "CC Type")
+    cc_exp_month: Int @doc(description: "CC Exp Month")
+    cc_exp_year: Int @doc(description: "CC Exp Year")
+}
+
+input PaymentMethodInput {
+    sagepaysuite_server: SegaPaySuiteServerInput @doc(description: "Required input for SegaPay Server payments")
+    sagepaysuite_pi: SegaPaySuitePiInput @doc(description: "Required input for SegaPay Pi payments")
+}
+
+input SegaPaySuiteServerInput {
+    save_token: Boolean! @doc(description: "Save Token")
+    token: String! @doc(description: "Token")
+}
+
+input SegaPaySuitePiInput {
+    card_identifier: string! @doc(description: "Card Identifier")
+    msk: string! @doc(description: "Merchant session key")
+    card_last_four: Int! @doc(description: "Card Last Four")
+    card_exp_month: Int! @doc(description: "Card Exp Month")
+    card_exp_year: Int! @doc(description: "Card Exp Year")
+    card_type: String! @doc(description: "Card Type")
+    save_token: Boolean @doc(description: "Save Token")
+    reusable_token: Boolean @doc(description: "Reusable Token")
+}
