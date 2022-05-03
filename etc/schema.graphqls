@@ -4,6 +4,10 @@ type StoreConfig @doc(description: "The type contains information about a store 
     sagepaysuite_max_token: String @doc(description: "Max amount of tokens per customer")
 }
 
+type Query {
+    getSegaPaySessionKey: SegaPaySessionOuput @resolver( class: "Lof\\SagePaySuiteGraphQl\\Model\\Resolver\\GetSessionKey") @doc(description: "Query prepare payment get segapay merchant session key.")
+}
+
 type Customer {
     listSegapayTokens: SegaPayTokens @resolver( class: "Lof\\SagePaySuiteGraphQl\\Model\\Resolver\\ListTokens") @doc(description: "Query list saved segapay tokens of current customer.")
 }
@@ -19,6 +23,12 @@ type SegaPayToken {
     cc_type: Int @doc(description: "CC Type")
     cc_exp_month: Int @doc(description: "CC Exp Month")
     cc_exp_year: Int @doc(description: "CC Exp Year")
+}
+
+type SegaPaySessionOuput {
+    success: Boolean @doc(description: "Success flag")
+    error_message: String @doc(description: "Error message")
+    response: String @doc(description: "Response data")
 }
 
 input PaymentMethodInput {
